@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title style="text-align: center;">PRODUCTOS</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-grid *ngIf="products">
+    <ion-row>
+      <ion-col *ngFor="let p of products" size="12" size-md="3">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>
+              {{p.name}}
+            </ion-card-title>
+            <ion-card-subtitle>
+              {{p.description}}
+            </ion-card-subtitle>
+          </ion-card-header>
+          <img [src]="p.image && p.image.formats.small.url ? 'http://localhost:1337' + p.image.formats.small.url : 'https://upload.wikimedia.org/wikipedia/commons/0/0a/No-image-available.png'" style="width: 100%;"/>
+          <ion-card-content style="text-align: center;">
+            {{p.price}}$
+            ({{p.date}})
+            <br/>
+            <ion-button color="warning" [routerLink]="['/', 'product', 'edit', p.id]">Actualizar</ion-button>
+            <ion-button color="danger" (click)="deleteData(p.id)">Eliminar</ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="/add-product">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
